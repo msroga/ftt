@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wicket:panel xmlns:wicket="http://wicket.apache.org">
+
+    <wicket:child/>
+
+    <div class="panel panel-grey" wicket:id="widget">
+
+        <div class="panel-heading">
+            <header role="heading" wicket:id="header">
+                <!-- HEADER -->
+            </header>
+        </div>
+        <!-- widget div-->
+        <div role="content" wicket:id="content">
+
+            <!-- widget edit box -->
+            <div class="jarviswidget-editbox">
+                <!-- This area used as dropdown edit box -->
+
+            </div>
+            <!-- end widget edit box -->
+
+            <!-- widget content -->
+            <div class="no-padding">
+                <div class="panel-body" wicket:id="toolbars">
+                </div>
+                <div role="grid" class="dataTables_wrapper"
+                     id="dt_basic_wrapper">
+                    <div id="scrollablePanel" style="overflow-x: auto; overflow-y: inherit" class="dt-wrapper">
+                        <table wicket:id="table"
+                               class="table expandable-table-striped table-bordered table-condensed table-hover dataTable"
+                               id="dt_basic" aria-describedby="dt_basic_info" style="margin-top: 0px !important;">
+                            <thead wicket:id="headersToolbar">
+                            </thead>
+
+                            <tbody role="alert" aria-live="polite" aria-relevant="all" wicket:id="body">
+                            <tr wicket:id="rows">
+                                <td wicket:id="cells">
+                                    <span wicket:id="cell">[cell]</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="dt-toolbar-footer" wicket:id="navigationToolbar">
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- end widget content -->
+
+        </div>
+        <!-- end widget div -->
+
+    </div>
+</wicket:panel>

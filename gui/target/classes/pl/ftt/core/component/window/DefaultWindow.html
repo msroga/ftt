@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wicket:extend xmlns:wicket="http://wicket.apache.org">
+	<form class="form-horizontal" wicket:id="form">
+		<div class="modal-body">
+			<wicket:child/>
+		</div>
+		<div class="modal-footer">
+			<button data-dismiss="modal" class="btn btn-default btn-sm" type="button" wicket:id="cancelButton">
+				<wicket:message key="button.cancel"/>
+			</button>
+			<button class="btn btn-primary btn-sm" type="button" wicket:id="submitButton">
+				<wicket:message key="button.save"/>
+			</button>
+		</div>
+	</form>
+</wicket:extend>

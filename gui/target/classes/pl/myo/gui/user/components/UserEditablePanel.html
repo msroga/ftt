@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wicket:panel xmlns:wicket="http://wicket.apache.org">
+
+    <div class="col-sm-6">
+        <h2 class="row-seperator-header">
+            <wicket:message key="data.header"/>
+        </h2>
+        <div wicket:id="loginField"/>
+        <div wicket:id="nameField"/>
+        <div wicket:id="surnameField"/>
+        <div wicket:id="emailField"/>
+        <div wicket:id="typeField"/>
+        <div wicket:id="genderField"/>
+        <div wicket:id="socialNumberField"/>
+    </div>
+
+    <div wicket:id="passwordContainer" class="col-sm-6">
+        <h2 class="row-seperator-header">
+            <wicket:message key="password.header"/>
+            <span wicket:id="passwordInformation" style="font-size: 13px" class="note pull-right"></span>
+        </h2>
+
+        <form wicket:id="passwordForm">
+            <div wicket:id="password.pass"/>
+            <div wicket:id="password.confirmPass"/>
+        </form>
+
+    </div>
+
+</wicket:panel>

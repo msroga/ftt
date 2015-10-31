@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wicket:panel xmlns:wicket="http://wicket.apache.org">
+    <div class="panel panel-grey">
+        <div class="panel-heading">
+            <header role="heading">
+                <label></label>
+                <wicket:message key="last.doctors.opinioned.header"></wicket:message>
+            </header>
+        </div>
+        <div class="no-padding">
+            <div wicket:id="listView" class="panel-body">
+                <div class="col-sm-3">
+                    <label wicket:id="names"></label>
+                </div>
+                <div class="col-sm-8">
+                    <div class="progress">
+                        <div wicket:id="positiveContainer" class="progress-bar progress-bar-success">
+                            <span class="sr-only"></span>
+                        </div>
+                        <div wicket:id="negativeContainer" class="progress-bar progress-bar-danger">
+                            <span class="sr-only"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-1">
+                       <label wicket:id="allOpinions"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+</wicket:panel>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wicket:panel xmlns:wicket="http://wicket.apache.org">
+    <h4 class="list-group-item-heading">
+        <label class="col-sm-8" wicket:id="titleLabel"></label>
+        <label class="author-label pull-right" wicket:id="dateLabel"></label>
+        <label class="author-label pull-right" wicket:id="userLabel"></label>
+    </h4>
+    <p wicket:id="tagsContainer" class="list-group-item-text col-sm-9">
+        <wicket:container wicket:id="tags">
+            <label wicket:id="tag" class="label label-info"></label>
+        </wicket:container>
+    </p>
+    <div wicket:id="actionsContainer" class="col-sm-3">
+        <a wicket:id="deleteLink" class="btn btn-xs pull-right text-danger">
+            <i class="fa fa-times"></i>
+        </a>
+        <a wicket:id="archiveLink" class="btn btn-xs pull-right text-warning">
+            <i class="fa fa-archive"></i>
+        </a>
+        <a wicket:id="editLink" class="btn btn-xs pull-right">
+            <i class="fa fa-edit"></i>
+        </a>
+    </div>
+</wicket:panel>

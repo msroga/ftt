@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wicket:extend xmlns:wicket="http://wicket.apache.org">
+    <div id="content" class="col-sm-offset-2 col-sm-8">
+
+        <form wicket:id="form">
+            <header>
+                <h2><wicket:message key="sign.in.label"/></h2>
+            </header>
+            <fieldset>
+                <div class="col-sm-6">
+                    <h2 class="row-seperator-header">
+                        <wicket:message key="data.header"/>
+                    </h2>
+                    <div wicket:id="loginField"/>
+                    <div wicket:id="nameField"/>
+                    <div wicket:id="surnameField"/>
+                    <div wicket:id="emailField"/>
+                    <div wicket:id="genderField"/>
+                    <div wicket:id="socialNumberField"/>
+                </div>
+
+                <div wicket:id="passwordContainer" class="col-sm-6">
+                    <h2 class="row-seperator-header">
+                        <wicket:message key="password.header"/>
+                    </h2>
+
+                    <form wicket:id="passwordForm">
+                        <div wicket:id="password.pass"/>
+                        <div wicket:id="password.confirmPass"/>
+                    </form>
+
+                </div>
+            </fieldset>
+            <footer>
+                <button class="btn btn-primary pull-right" type="submit" wicket:id="submitLink">
+                    <wicket:message key="sign.in.button"/>
+                </button>
+            </footer>
+        </form>
+
+    </div>
+</wicket:extend>

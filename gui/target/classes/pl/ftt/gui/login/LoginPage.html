@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wicket:head xmlns:wicket="http://wicket.apache.org">
+    <script language="JavaScript" type="text/javascript">
+        if (top.location != location) {
+            top.location.href = document.location.href;
+        }
+    </script>
+</wicket:head>
+<wicket:extend xmlns:wicket="http://wicket.apache.org">
+
+    <header id="header">
+        <!--<div id="logo-group">-->
+            <!--<span id="logo" style="margin-top: 9px"> <img src="static/img/inotis.png" alt="SmartAdmin"> </span>-->
+        <!--</div>-->
+    </header>
+
+    <div class="login-margin">
+        <div class="well no-padding col-sm-offset-5 col-sm-2">
+            <form wicket:id="signInForm" class="smart-form client-form login-form" novalidate="novalidate">
+                <header>
+                    <wicket:message key="sign.in.label"/>
+                </header>
+
+                <fieldset>
+
+                    <section>
+                        <label class="label black-label">
+                            <wicket:message key="label.login"/>
+                        </label>
+                        <label class="input">
+                            <i class="icon-append fa fa-user"></i>
+                            <input type="text" name="med_user">
+                            <b class="tooltip tooltip-top-right">
+                                <i class="fa fa-user txt-color-teal"></i>
+                                <wicket:message key="tooltip.login"/>
+                            </b></label>
+                    </section>
+
+                    <section>
+                        <label class="label black-label">
+                            <wicket:message key="label.password"/>
+                        </label>
+                        <label class="input">
+                            <i class="icon-append fa fa-lock"></i>
+                            <input type="password" name="med_password">
+                            <b class="tooltip tooltip-top-right">
+                                <i class="fa fa-lock txt-color-teal"></i>
+                                <wicket:message key="tooltip.password"/>
+                            </b></label>
+                    </section>
+
+                    <section>
+                        <div wicket:id="feedback"></div>
+                    </section>
+
+                </fieldset>
+                <footer>
+                    <button class="btn btn-primary pull-right" type="submit">
+                        <wicket:message key="sign.in.button"/>
+                    </button>
+                </footer>
+                <a wicket:id="registerLink"><wicket:message key="button.register"></wicket:message></a>
+            </form>
+
+        </div>
+    </div>
+
+    <wicket:container wicket:id="script"/>
+
+</wicket:extend>

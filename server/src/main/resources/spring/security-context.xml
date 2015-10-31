@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:utils="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+				http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+				http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+    <context:component-scan base-package="pl.ftt.security.crypto"/>
+
+    <alias alias="securityFilterChain" name="defaultSecurityFilterChain"/>
+    <bean id="defaultSecurityFilterChain"
+          class="pl.ftt.security.filter.SecurityFilterChainProxy">
+        <security:filter-chain-map path-type="ant">
+            <security:filter-chain pattern="/**"
+                                   filters="securityContextPersistenceFilter,
+                                   authenticationHeaderProcessingFilter,
+                                   authenticationRememberMeProcessingFilter,
+                                   usernamePasswordAuthenticationFilter,
+                                   logoutFilter,
+                                   exceptionTranslationFilter,
+                                   filterSecurityInterceptor"/>
+        </security:filter-chain-map>
+        <property name="excludeList" ref="securityFilterChainExcludeList"/>
+    </bean>
+
+    <bean id="userDetailsService" class="pl.ftt.security.FttUserDetailsService">
+        <!--<property name="userService" ref="userService"/>-->
+        <!--<property name="passwordService" ref="passwordService" />-->
+        <property name="configurationService" ref="defaultConfigurationService" />
+        <property name="passwordEncoder" ref="passwordEncoder" />
+        <property name="checkAdminIpAddress" value="${check.admin.ip.address}" />
+    </bean>
+
+    <alias alias="userDetailsCache" name="defaultUserDetailsCache"/>
+    <bean id="defaultUserDetailsCache"
+          class="org.springframework.security.core.userdetails.cache.EhCacheBasedUserCache">
+        <property name="cache">
+            <bean class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+                <property name="cacheManager" ref="ehCacheManager"/>
+                <property name="cacheName" value="userDetailsCache"/>
+            </bean>
+        </property>
+    </bean>
+
+    <alias alias="ehCacheManager" name="defaultEhCacheManager"/>
+    <bean id="defaultEhCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
+          destroy-method="destroy">
+        <property name="configLocation" value="classpath:configuration/security-ehcache.xml"/>
+    </bean>
+
+    <alias alias="passwordEncoder" name="defaultPasswordEncoder"/>
+    <bean id="defaultPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+    <bean id="wicketAuthenticationManager"
+          class="org.springframework.security.authentication.ProviderManager">
+        <constructor-arg index="0">
+            <list>
+                <bean class="pl.ftt.security.authentication.FttServiceAuthenticationProvider">
+                    <property name="userDetailsService" ref="userDetailsService" />
+                    <property name="passwordEncoder" ref="passwordEncoder" />
+                    <property name="userCache" ref="userDetailsCache" />
+                    <!--<property name="loginAttemptsService" ref="loginAttemptsService" />-->
+                    <!--<property name="userLittleService" ref="userLittleService" />-->
+                    <!--<property name="adminHistoryCreator" ref="userHistoryCreator" />-->
+                    <!--<property name="historyService" ref="historyService" />-->
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <alias alias="securityFilterChainExcludeList" name="myoSecurityFilterChainExcludeList" />
+    <utils:list id="myoSecurityFilterChainExcludeList">
+        <value>/</value>
+        <value>/static/**</value>
+        <value>/public/**</value>
+        <value>/wicket/resource/**</value>
+        <value>${security.login.path}</value>
+        <value>${security.login.failure.redirect.path}</value>
+        <value>${security.change.password.url}</value>
+        <value>/error404</value>
+        <value>/error403</value>
+        <value>/error500</value>
+        <value>/expiredsession</value>
+        <value>/api/**</value>
+    </utils:list>
+
+    <!-- ************** authorization filters ************************* -->
+
+    <alias alias="securityContextPersistenceFilter" name="defaultSecurityContextPersistenceFilter"/>
+    <bean id="defaultSecurityContextPersistenceFilter"
+          class="pl.ftt.security.context.ExcludeSecurityContextPersistenceFilter">
+        <constructor-arg index="0">
+            <bean class='org.springframework.security.web.context.HttpSessionSecurityContextRepository'>
+                <property name='allowSessionCreation' value='false'/>
+            </bean>
+        </constructor-arg>
+        <property name="excludeList" ref="securityContextPersistenceFilterExcludeList"/>
+    </bean>
+
+    <alias alias="securityContextPersistenceFilterExcludeList" name="defaultSecurityContextPersistenceFilterExcludeList"/>
+    <utils:list id="defaultSecurityContextPersistenceFilterExcludeList">
+        <value>${security.logout.path}</value>
+    </utils:list>
+
+    <alias alias="abstractAuthenticationProcessingFilter" name="defaultAbstractAuthenticationProcessingFilter"/>
+    <bean id="defaultAbstractAuthenticationProcessingFilter"
+          class="pl.ftt.security.filter.AbstractAuthenticationProcessingFilter"
+          abstract="true">
+        <property name="marshaller" ref="tokenMarshaller"/>
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="tokenName" value="${security.token.name}"/>
+    </bean>
+
+    <alias alias="authenticationHeaderProcessingFilter" name="defaultAuthenticationHeaderProcessingFilter"/>
+    <bean id="defaultAuthenticationHeaderProcessingFilter"
+          class="pl.ftt.security.filter.AuthenticationHeaderProcessingFilter"
+          parent="abstractAuthenticationProcessingFilter">
+        <property name="headerEnabled" value="${security.header.enable}"/>
+    </bean>
+
+    <alias alias="authenticationRememberMeProcessingFilter" name="defaultAuthenticationRememberMeProcessingFilter"/>
+    <bean id="defaultAuthenticationRememberMeProcessingFilter"
+          class="pl.ftt.security.filter.AuthenticationRememberMeProcessingFilter"
+          parent="abstractAuthenticationProcessingFilter">
+        <property name="rememberMeEnabled" value="${security.cookie.enable}"/>
+        <property name="rememberMeParameter" value="${security.rememberme.key}"/>
+    </bean>
+
+    <alias alias="loginUrlAuthenticationEntryPoint" name="defaultLoginUrlAuthenticationEntryPoint"/>
+    <bean id="defaultLoginUrlAuthenticationEntryPoint"
+          class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+        <constructor-arg index="0" value="${security.login.path}"/>
+    </bean>
+
+    <alias alias="usernamePasswordAuthenticationFilter" name="defaultUsernamePasswordAuthenticationFilter"/>
+    <bean id="defaultUsernamePasswordAuthenticationFilter"
+          class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+        <property name="filterProcessesUrl" value="${security.auth.path}"/>
+        <property name="usernameParameter" value="${security.username.key}"/>
+        <property name="passwordParameter" value="${security.password.key}"/>
+        <property name="rememberMeServices" ref="authenticationRememberMeProcessingFilter"/>
+        <property name="authenticationSuccessHandler" ref="myoAuthenticationSuccessHandler"/>
+        <property name="authenticationFailureHandler" ref="authenticationFailureHandler"/>
+        <property name="authenticationManager" ref="authenticationManager"/>
+    </bean>
+
+    <alias alias="myoAuthenticationSuccessHandler" name="defaultAuthenticationSuccessHandler" />
+    <bean id="defaultAuthenticationSuccessHandler" class="pl.ftt.security.SuccessfulLoginHandler">
+        <property name="accessDeniedPageUrl" value="${security.access.denied.page.url}" />
+    </bean>
+
+    <alias alias="authenticationFailureHandler" name="defaultAuthenticationFailureHandler"/>
+    <bean id="defaultAuthenticationFailureHandler"
+          class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+        <property name="defaultFailureUrl" value="${security.login.failure.redirect.path}"/>
+    </bean>
+
+    <alias alias="logoutFilter" name="defaultLogoutFilter"/>
+    <bean id="defaultLogoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
+        <constructor-arg index="0" value="${security.login.path}"/>
+        <constructor-arg index="1">
+            <bean class="org.springframework.security.web.authentication.logout.CookieClearingLogoutHandler">
+                <constructor-arg index="0" value="${security.token.name}"/>
+            </bean>
+        </constructor-arg>
+        <property name="filterProcessesUrl" value="${security.logout.path}"/>
+    </bean>
+
+    <alias alias="authenticationManager" name="defaultAuthenticationManager"/>
+    <bean id="defaultAuthenticationManager"
+          class="org.springframework.security.authentication.ProviderManager">
+        <constructor-arg index="0">
+            <list>
+                <bean class="pl.ftt.security.authentication.ServiceAuthenticationProvider">
+                    <property name="userDetailsService" ref="userDetailsService"/>
+                    <property name="passwordEncoder" ref="passwordEncoder"/>
+                    <property name="userCache" ref="userDetailsCache"/>
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <alias alias="tokenMarshaller" name="defaultTokenMarshaller"/>
+    <bean id="defaultTokenMarshaller" class="pl.ftt.security.token.TokenMarshaller">
+        <property name="tokenConverter">
+            <bean class="pl.ftt.security.token.converter.UserTokenConverter"/>
+        </property>
+        <property name="tokenCrypto" ref="basicEncryptor"/>
+        <property name="tokenEncoder">
+            <bean class="pl.ftt.security.token.encoder.Base64TokenEncoder"/>
+        </property>
+    </bean>
+
+    <alias alias="exceptionTranslationFilter" name="defaultExceptionTranslationFilter"/>
+    <bean id="defaultExceptionTranslationFilter"
+          class="org.springframework.security.web.access.ExceptionTranslationFilter">
+        <constructor-arg index="0">
+            <bean class="pl.ftt.security.access.Http401UnauthorizedEntryPoint">
+                <property name="loginPage" value="${security.login.path}"/>
+            </bean>
+        </constructor-arg>
+        <property name="accessDeniedHandler">
+            <bean class="pl.ftt.security.access.Http403ForbiddenAccessDeniedHandler"/>
+        </property>
+    </bean>
+
+    <alias alias="accessDecisionManager" name="defaultAccessDecisionManager"/>
+    <bean id="defaultAccessDecisionManager"
+          class="org.springframework.security.access.vote.AffirmativeBased">
+        <constructor-arg index="0">
+            <list>
+                <bean class="org.springframework.security.access.vote.RoleVoter"/>
+                <bean class="org.springframework.security.access.vote.AuthenticatedVoter"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <alias alias="filterSecurityInterceptor" name="defaultFilterSecurityInterceptor"/>
+    <bean id="defaultFilterSecurityInterceptor"
+          class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+        <property name="alwaysReauthenticate" value="false"/>
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="accessDecisionManager" ref="accessDecisionManager"/>
+        <property name="securityMetadataSource" ref="securityMetadataSource"/>
+    </bean>
+
+    <security:filter-security-metadata-source id="securityMetadataSource" lowercase-comparisons="false" path-type="ant">
+        <security:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY"/>
+    </security:filter-security-metadata-source>
+</beans>

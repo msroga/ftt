@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wicket:panel xmlns:wicket="http://wicket.apache.org">
+    <form class="form-horizontal" wicket:id="form">
+        <fieldset>
+            <legend style="height: 48px">
+                <a wicket:id="editLink" class="btn btn-primary btn-sm pull-right">
+                    <span wicket:id="label">[edit]</span>&nbsp;<i class="fa fa-undo"></i></a>
+            </legend>
+
+            <div wicket:id="editablePanel"/>
+
+        </fieldset>
+
+        <div class="form-actions fix-portlet-form">
+            <div class="row">
+                <div class="col-md-12 pull-right short-line">
+                    <a wicket:id="cancelButton" class="btn btn-default btn-sm">
+                        <span><wicket:message key="button.cancel"/></span>&nbsp;<i class="fa fa-undo"></i></a>
+                    <button type="submit" class="btn btn-primary btn-sm"
+                            wicket:id="submitButton">
+                        <wicket:message key="button.save"/>&nbsp;<i class="fa fa-save"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</wicket:panel>

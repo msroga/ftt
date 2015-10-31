@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wicket:head xmlns:wicket="http://wicket.apache.org">
+    <script src="static/js/ckeditor/ckeditor.js"></script>
+    <!--<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />-->
+    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>-->
+    <script src="static/js/main.js"></script>
+</wicket:head>
+
+<wicket:extend xmlns:wicket="http://wicket.apache.org">
+ <body wicket:id="bodyContainer" class="bg-img">
+
+ <wicket:container wicket:id="messagesScript"/>
+    <!--<header id="header">-->
+        <!--<div id="logo-group">-->
+
+            <!--<!-- PLACE YOUR LOGO HERE -->-->
+            <!--<!--fix logo position-->-->
+           <!--<!--  <span id="logo" style="margin-top: 9px"> <img src="static/img/inotis.png" alt="SmartAdmin"> </span> -->-->
+            <!--<!-- END LOGO PLACEHOLDER -->-->
+
+        <!--</div>-->
+
+        <!--<!-- pulled right: nav area -->-->
+        <!--<div class="pull-right">-->
+        <!--</div>-->
+    <!--</header>-->
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul wicket:id="menuPanel" class="nav navbar-nav"></ul>
+                <ul id="logout" class="nav-logged transparent pull-right">
+                    <a wicket:id="loggedLink">
+                        <span class="user-logged-label" wicket:id="loggedInUser"/>
+                    </a>
+                    <span>
+                        <a data-action="userLogout" href="logout" wicket:message="title:logout.button">
+                            <i class="fa fa-sign-out text-danger"></i>
+                        </a>
+                    </span>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- MAIN PANEL -->
+    <div id="main" role="main" class="container bg-container" style="padding-top: 50px">
+        <wicket:child/>
+    </div>
+    <!-- END MAIN PANEL -->
+  </body>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+</wicket:extend>

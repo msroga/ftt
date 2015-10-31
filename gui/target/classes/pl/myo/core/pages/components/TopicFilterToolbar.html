@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wicket:panel xmlns:wicket="http://wicket.apache.org">
+    <div class="col-sm-12" style="margin-bottom: 5px">
+        <form wicket:id="form">
+            <div class="col-sm-2">
+                <div class="input-group col-sm-12">
+                    <input wicket:id="titleFilter" class="form-control"/>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="input-group col-sm-12">
+                    <select wicket:id="tagsFilter" class="select2" multiple style="width: 100%"></select>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="input-group col-sm-12">
+                    <select wicket:id="activeFilter" class="form-control" style="width: 100%"></select>
+                </div>
+            </div>
+            <div class="col-sm-3 pull-right">
+                <a wicket:id="addTopic" class="btn btn-md btn-success pull-right">
+                    <i class="fa fa-plus"></i>
+                    <wicket:message key="button.add"></wicket:message>
+                </a>
+                <a class="btn btn-primary btn-md pull-right" wicket:id="submitButton"><i class="fa fa-search"></i>
+                    <wicket:message key="button.search"/>
+                </a>
+                <a wicket:message="title:clear.filters"
+                   class="btn btn-primary btn-md pull-right btn-right-separator"
+                   wicket:id="refreshButton">
+                    <i class="fa fa-eraser"></i>
+                </a>
+            </div>
+
+        </form>
+    </div>
+</wicket:panel>

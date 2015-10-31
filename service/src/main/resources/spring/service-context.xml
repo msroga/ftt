@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:utils="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- your content goes here -->
+
+	<context:component-scan base-package="pl.ftt.service"/>
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<bean id="defaultConfigurationService" class="pl.ftt.service.impl.ConfigurationServiceImpl">
+		<property name="configurationProperties" ref="applicationProperties" />
+	</bean>
+
+	<bean id="packageScanner" class="pl.ftt.core.scanner.PackageScannerImpl" />
+
+	<!--<bean id="xStream" class="pl.solsoft.common.pl.ftt.service.impl.XStreamFactoryBean">-->
+		<!--<property name="packageScanner" ref="packageScanner" />-->
+		<!--<property name="ignoreUnknownElements" value="true"/>-->
+		<!--<property name="packagesToScan">-->
+			<!--<utils:list>-->
+				<!--<value>pl.solsoft.common.plugin</value>-->
+                <!--<value>pl.inotis.pl.ftt.domain</value>-->
+			<!--</utils:list>-->
+		<!--</property>-->
+	<!--</bean>-->
+
+	<!--<bean id="pluginFactory" class="pl.solsoft.common.pl.ftt.service.impl.PluginFactoryImpl">-->
+		<!--<property name="basePackage" value="plugin" />-->
+		<!--<property name="pluginPattern" value="*.xml" />-->
+		<!--<property name="xStream" ref="xStream" />-->
+	<!--</bean>-->
+
+<!--	<bean id="cacheProvider" class="pl.ftt.factory.CacheProviderFactoryBean">
+		<property name="providerClass" value="${cache.provider.class}" />
+		<property name="properties" ref="applicationProperties" />
+	</bean>-->
+
+	<!--<bean id="httpClient" class="pl.solsoft.common.pl.ftt.service.impl.HttpClientFactoryBean">-->
+		<!--<property name="soKeepAlive" value="${http.client.soKeepAlive}" />-->
+		<!--<property name="soReuseAddress" value="${http.client.soReuseAddress}" />-->
+		<!--<property name="tcpNoDelay" value="${http.client.tcpNoDelay}" />-->
+		<!--<property name="staleConnectionCheckEnabled" value="${http.client.staleConnectionCheckEnabled}" />-->
+		<!--<property name="maxTotalConnections" value="${http.client.maxTotalConnections}" />-->
+		<!--<property name="soTimeout" value="${http.client.soTimeout}" />-->
+		<!--<property name="connectTimeout" value="${http.client.connectTimeout}" />-->
+		<!--<property name="connectionRequestTimeout" value="${http.client.connectionRequestTimeout}" />-->
+		<!--<property name="soLingerTimeout" value="${http.client.soLingerTimeout}" />-->
+	<!--</bean>-->
+	<!---->
+	<!--<bean id="googleMapsTaskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">-->
+	     <!--<property name="corePoolSize" value="${google.maps.corePoolSize}" />-->
+	     <!--<property name="maxPoolSize" value="${google.maps.maxTotalConnections}" />-->
+	     <!--<property name="queueCapacity" value="${google.maps.queueCapacity}" />-->
+	<!--</bean>-->
+  <!---->
+  	<!--<bean id="freemarkerBeansWrapper" class="freemarker.ext.beans.BeansWrapper">-->
+  		<!--<property name="simpleMapWrapper" value="true"/>-->
+  	<!--</bean>-->
+
+ 	<!--<bean id="freemarkerConfiguration" class="pl.inotis.factory.FreeMarkerConfigurationFactoryBean">-->
+		<!--<property name="templateLoaderPath" value="classpath:/freemarker/"/>-->
+		<!--<property name="defaultEncoding" value="UTF-8"/>-->
+		<!--<property name="objectWrapper" ref="freemarkerBeansWrapper"/>-->
+    <!--</bean>    -->
+    	
+</beans>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wicket:head xmlns:wicket="http://wicket.apache.org">
+
+</wicket:head>
+<wicket:extend xmlns:wicket="http://wicket.apache.org">
+    <div id="content">
+        <div class="panel">
+            <div class="panel-body">
+                <wicket:child/>
+                <div wicket:id="topicFilterToolbar"/>
+
+                <div wicket:id="topicsContainer" class="col-sm-12">
+                    <wicket:container wicket:id="topicsView">
+                        <div class="list-group col-sm-6 well topic-panel" wicket:id="topicPanel">[Topic]</div>
+                    </wicket:container>
+                </div>
+            </div>
+        </div>
+
+        <div wicket:id="topicWindow"/>
+    </div>
+</wicket:extend>

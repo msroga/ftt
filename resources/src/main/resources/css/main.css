@@ -1,0 +1,106 @@
+.black-label{
+    color: #000000 !important;
+}
+.user-logged-label{
+    color: #ffffff !important;
+}
+
+.nav-logged{
+    font-size: 17px !important;
+}
+
+.panel-grey {
+    border-color: #5a5a5a;
+}
+.panel-grey > .panel-heading {
+    color: #fff;
+    background-color: #5a5a5a;
+    border-color: #5a5a5a;
+}
+.panel-grey > .panel-heading + .panel-collapse > .panel-body {
+    border-top-color: #5a5a5a;
+}
+.panel-grey > .panel-heading .badge {
+    color: #5a5a5a;
+    background-color: #fff;
+}
+.panel-grey > .panel-footer + .panel-collapse > .panel-body {
+    border-bottom-color: #5a5a5a;
+}
+
+.btn-header-fix{
+    display: inline !important;
+}
+
+.topic-panel{
+    border: 3px solid #000000 !important;
+    padding: 10px !important;
+    border-radius: 15px !important;
+}
+
+.author-label{
+    font-size: 12px !important;
+    color: #5a5a5a;
+    margin-right: 3px
+}
+
+.topic-panel:hover{
+    background-color: #5a5a5a;
+    color: #ffffff;
+}
+
+.topic-panel:hover .author-label
+{
+    color: #ffffff;
+}
+
+.bg-img {
+    background: url("../img/Elegant_Background-18.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.bg-container{
+    min-height: 100vh !important;
+    background-color: rgba(9, 7, 9, 0.80);
+}
+
+/*table.dataTable thead .sorting,table.dataTable thead .sorting_asc,*/
+/*table.dataTable thead .sorting_asc_disabled,*/
+/*table.dataTable thead .sorting_desc,*/
+/*table.dataTable thead .sorting_desc_disabled{*/
+    /*cursor: pointer*/
+/*}*/
+/*table.dataTable thead>tr>th{*/
+     /*padding-right: 18px*/
+/*}*/
+/*table.dataTable th:active{*/
+    /*outline: 0*/
+/*}*/
+/*div.dataTables_scrollHead table{*/
+    /*margin-bottom: 0 !important;*/
+    /*border-bottom-left-radius: 0;*/
+    /*border-bottom-right-radius: 0*/
+/*}*/
+/*div.dataTables_scrollHead table thead tr:last-child td:first-child,*/
+/*div.dataTables_scrollHead table thead tr:last-child th:first-child{*/
+    /*border-bottom-left-radius: 0 !important;*/
+    /*border-bottom-right-radius: 0 !important*/
+/*}*/
+/*div.dataTables_scrollBody table{*/
+    /*border-top: none;*/
+    /*margin-top: 0 !important;*/
+    /*margin-bottom: 0 !important*/
+/*}*/
+/*div.dataTables_scrollBody tbody tr:first-child td,div.dataTables_scrollBody tbody tr:first-child th{*/
+    /*border-top: none*/
+/*}*/
+/*div.dataTables_scrollFoot table{*/
+    /*margin-top: 0 !important;*/
+    /*border-top: none*/
+/*}*/
+/*table.table-bordered.dataTable{*/
+    /*border-collapse: separate !important*/
+/*}*/
