@@ -44,9 +44,9 @@ CREATE INDEX station_name_idx ON "station" USING btree (name);
 CREATE TABLE "connection"(
   id BIGSERIAL PRIMARY KEY
   active BOOLEAN NOT NULL DEFAULT TRUE,
-  number VARCHAR(16),
+  number VARCHAR(16) NOT NULL,
   comment TEXT,
-  "type" VARCHAR (32),
+  "type" VARCHAR (32) NOT NULL,
   UNIQUE (number)
 )
 CREATE INDEX connection_active_idx ON "connection" USING btree (active);
@@ -57,7 +57,7 @@ CREATE TABLE "connection_station_relation"(
   connection_id int8 NOT NULL,
   station_id int8 NOT NULL,
   index int4 NOT NULL,
-  departure_time time not null,
+  departure_time time NOT NULL,
   CONSTRAINT connection_id_fk FOREIGN KEY (connection_id)
     REFERENCES "connection" (id) ON DELETE CASCADE,
   CONSTRAINT station_id_fk FOREIGN KEY (station_id)
@@ -69,7 +69,7 @@ CREATE INDEX connection_station_relation_station_id_idx ON "connection_station_r
 
 CREATE TABLE "tag"(
   id BIGSERIAL PRIMARY KEY,
-  name VARCHAR (128),
+  name VARCHAR (128) NOT NULL,
   description text,
   UNIQUE (name)
 );
