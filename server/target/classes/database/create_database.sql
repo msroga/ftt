@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS myomeddb;
-DROP DATABASE IF EXISTS myomedstoragedb;
-DROP ROLE IF EXISTS myo;
+DROP DATABASE IF EXISTS fttdb;
+-- DROP DATABASE IF EXISTS myomedstoragedb;
+DROP ROLE IF EXISTS fttUser;
 
 CREATE USER fttUser;
 ALTER USER fttUser with ENCRYPTED password 'test';
