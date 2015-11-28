@@ -14,6 +14,7 @@ import pl.ftt.core.component.FeedbackPanel;
 import pl.ftt.core.component.JavaScriptLabel;
 import pl.ftt.core.component.ResourceMap;
 import pl.ftt.core.pages.AbstractPage;
+import pl.ftt.gui.user.RegisterPage;
 import pl.ftt.service.IConfigurationService;
 
 import java.util.Map;
@@ -54,7 +55,7 @@ public class LoginPage extends AbstractPage
          @Override
          public void onClick(AjaxRequestTarget target)
          {
-//            setResponsePage(RegisterPage.class);
+            setResponsePage(RegisterPage.class);
          }
       };
       loginForm.add(registerLink);

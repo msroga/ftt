@@ -1,5 +1,6 @@
 package gui;
 
+import com.googlecode.wicket.jquery.ui.settings.JQueryLibrarySettings;
 import org.apache.wicket.RuntimeConfigurationType;
 import org.apache.wicket.core.request.mapper.MountedMapper;
 import org.apache.wicket.injection.Injector;
@@ -12,11 +13,10 @@ import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.springframework.stereotype.Component;
 import org.wicketstuff.annotation.scan.AnnotatedMountScanner;
 import pl.ftt.core.menu.MenuHolder;
+import pl.ftt.gui.connections.ConnectionsPage;
 import pl.ftt.gui.formatter.FormatterScanner;
-import pl.ftt.gui.home.HomePage;
 import pl.ftt.gui.login.LoginPage;
 import pl.ftt.service.IConfigurationService;
-import com.googlecode.wicket.jquery.ui.settings.JQueryLibrarySettings;
 
 @Component(value = "wicketApplication")
 public class MainApplication extends WebApplication
@@ -32,7 +32,7 @@ public class MainApplication extends WebApplication
    public Class getHomePage()
    {
 
-      return HomePage.class; // return default page
+      return ConnectionsPage.class; // return default page
    }
 
    @Override

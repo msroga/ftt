@@ -95,16 +95,9 @@ public class MenuHolder implements Serializable
 
    public List<MenuItem> getFiltered()
    {
-      UserDetails userDetails = null;//securityService.getUserDetails();
-      if (userDetails == null)
-      {
-         return new ArrayList<>();
-      }
-      else
-      {
-         List<MenuItem> filtered = doFilter(menuItems, userDetails);
-         return filtered;
-      }
+      UserDetails userDetails = securityService.getUserDetails();
+      List<MenuItem> filtered = doFilter(menuItems, userDetails);
+      return filtered;
    }
 
    private List<MenuItem> doFilter(List<MenuItem> menuItems, UserDetails userDetails)
@@ -114,7 +107,7 @@ public class MenuHolder implements Serializable
       {
          for (MenuItem menuItem : menuItems)
          {
-         if (isAuthorized(menuItem, userDetails))
+            if (isAuthorized(menuItem, userDetails))
             {
                MenuItem cloned = SerializationUtils.clone(menuItem);
 
@@ -145,11 +138,18 @@ public class MenuHolder implements Serializable
    {
       Class clazz = menuItem.getTarget();
       AuthorizeType authorizeType = (AuthorizeType) clazz.getAnnotation(AuthorizeType.class);
-//      if (authorizeType != null)
-//      {
-//         return (userDetails.isAdministrator() && authorizeType.administrator()) || (userDetails.isDoctor() && authorizeType.doctor())
-//               || (userDetails.isUser() && authorizeType.user());
-//      }
+      if (authorizeType != null)
+      {
+         if (userDetails != null)
+         {
+            return (userDetails.isAdministrator() && authorizeType.administrator())
+                    || (userDetails.isUser() && authorizeType.user());
+         }
+         else
+         {
+            return authorizeType.guest();
+         }
+      }
       return true;
    }
 

@@ -8,9 +8,9 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface AuthorizeType
 {
-   boolean administrator() default true;
+   boolean administrator() default false;
 
    boolean user() default false;
 
-   boolean doctor() default false;
+   boolean guest() default false;
 }

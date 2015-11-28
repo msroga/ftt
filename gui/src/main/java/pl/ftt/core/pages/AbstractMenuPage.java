@@ -1,11 +1,12 @@
 package pl.ftt.core.pages;
 
-import java.util.List;
-import java.util.Map;
-
+import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.util.template.PackageTextTemplate;
 import pl.ftt.core.component.DefaultLabel;
@@ -14,30 +15,34 @@ import pl.ftt.core.component.ResourceMap;
 import pl.ftt.core.menu.MenuHolder;
 import pl.ftt.core.menu.MenuItem;
 import pl.ftt.core.menu.MenuPanel;
-
-import org.apache.wicket.AttributeModifier;
-import org.apache.wicket.markup.html.WebMarkupContainer;
-import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.Model;
 import pl.ftt.domain.User;
+import pl.ftt.gui.login.LoginPage;
+import pl.ftt.gui.user.RegisterPage;
+import pl.ftt.service.ISecurityService;
+
+import java.util.List;
+import java.util.Map;
 
 public class AbstractMenuPage extends AbstractPage 
 {
-	protected final MenuPanel menuPanel;
+   protected final MenuPanel menuPanel;
 
-	protected final WebMarkupContainer bodyContainer;
+   protected final WebMarkupContainer bodyContainer;
 
 	protected final IModel<String> bodyCssClassModel = new Model<>();
 
    protected final Label userNameLabel;
 
-//   protected final IModel<User> loggedUserModel = new Model<>();
+   protected final IModel<User> loggedUserModel = new Model<>();
+
+   @SpringBean
+   protected ISecurityService securityService;
 
 	public AbstractMenuPage() 
 	{
 		super();
-//      User user = securityService.getLoggedInUser();
-//      loggedUserModel.setObject(user);
+      User user = securityService.getLoggedInUser();
+      loggedUserModel.setObject(user);
       Map<String, String> map = new ResourceMap(
               this,
               getLocale(),
@@ -59,31 +64,50 @@ public class AbstractMenuPage extends AbstractPage
 		menuPanel = new MenuPanel("menuPanel", menuItems);
 		bodyContainer.add(menuPanel);
 
+      WebMarkupContainer loggedInUserContainer = new WebMarkupContainer("loggedInUserContainer");
+      loggedInUserContainer.setOutputMarkupId(true);
+      loggedInUserContainer.setVisible(loggedUserModel.getObject() != null);
+
       AjaxLink<User> loggedLink = new AjaxLink<User>("loggedLink")
       {
          @Override
          public void onClick(AjaxRequestTarget target)
          {
+            //todo profil page
 //            setResponsePage(new UserDetailsPage(new PageContext<User>(loggedUserModel.getObject())));
          }
       };
-      bodyContainer.add(loggedLink);
+      loggedInUserContainer.add(loggedLink);
+      bodyContainer.add(loggedInUserContainer);
 
-      userNameLabel = new DefaultLabel("loggedInUser", "Blum");
+      userNameLabel = new DefaultLabel("loggedInUser", loggedUserModel);
       userNameLabel.setOutputMarkupId(true);
       loggedLink.add(userNameLabel);
-	}
 
-//   @Override
-//   public void renderHead(IHeaderResponse response)
-//   {
-//      super.renderHead(response);
-//      response.render(CssHeaderItem
-//              .forCSS("body{ background-image: url('" + getBackgroundBodyImagePath() + "');};", "uniqueBodyBackground"));
-//   }
-//
-//   private String getBackgroundBodyImagePath()
-//   {
-//      return "static\\img\\Elegant_Background-18.jpg";
-//   }
+      WebMarkupContainer unLoggedUserContainer = new WebMarkupContainer("unLoggedUserContainer");
+      unLoggedUserContainer.setOutputMarkupId(true);
+      unLoggedUserContainer.setVisible(loggedUserModel.getObject() == null);
+      bodyContainer.add(unLoggedUserContainer);
+
+      AjaxLink loginLink = new AjaxLink("loginLink")
+      {
+         @Override
+         public void onClick(AjaxRequestTarget target)
+         {
+            setResponsePage(LoginPage.class);
+         }
+      };
+      unLoggedUserContainer.add(loginLink);
+
+
+      AjaxLink registerLink = new AjaxLink("registerLink")
+      {
+         @Override
+         public void onClick(AjaxRequestTarget target)
+         {
+            setResponsePage(RegisterPage.class);
+         }
+      };
+      unLoggedUserContainer.add(registerLink);
+	}
 }

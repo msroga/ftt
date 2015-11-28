@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wicket:panel xmlns:wicket="http://wicket.apache.org">
+        <form wicket:id="form" class="form-horizontal">
+            <header>
+                <h2><strong><wicket:message key="register.new.user"/></strong></h2>
+            </header>
+            <fieldset>
+                <div wicket:id="login"></div>
+                <div wicket:id="email"></div>
+                <div wicket:id="firstName"></div>
+                <div wicket:id="lastName"></div>
+                <form wicket:id="passwordForm">
+                    <div wicket:id="password.pass"></div>
+                    <div wicket:id="password.confirmPass"></div>
+                </form>
+            </fieldset>
+            <footer>
+                <a wicket:id="register" class="btn btn-primary pull-right">
+                    <wicket:message key="button.register"></wicket:message>
+                </a>
+            </footer>
+        </form>
+</wicket:panel>

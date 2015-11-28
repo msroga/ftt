@@ -4,6 +4,13 @@
     <!--<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />-->
     <!--<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>-->
     <script src="static/js/main.js"></script>
+
+    <!--<script language="JavaScript" type="text/javascript">-->
+        <!--if (top.location != location) {-->
+            <!--top.location.href = document.location.href;-->
+        <!--}-->
+    <!--</script>-->
+
 </wicket:head>
 
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
@@ -29,7 +36,7 @@
         <div class="container">
             <div id="navbar" class="collapse navbar-collapse">
                 <ul wicket:id="menuPanel" class="nav navbar-nav"></ul>
-                <ul id="logout" class="nav-logged transparent pull-right">
+                <ul wicket:id="loggedInUserContainer" id="logout" class="nav pull-right">
                     <a wicket:id="loggedLink">
                         <span class="user-logged-label" wicket:id="loggedInUser"/>
                     </a>
@@ -38,6 +45,15 @@
                             <i class="fa fa-sign-out text-danger"></i>
                         </a>
                     </span>
+                </ul>
+                <ul wicket:id="unLoggedUserContainer" class="nav pull-right">
+                    <a wicket:id="loginLink" class="btn btn-sm btn-primary pull-right">
+                        <wicket:message key="sign.in.button"/>
+                    </a>
+                    <a wicket:id="registerLink" class="btn btn-sm btn-default pull-right">
+                        <wicket:message key="button.register"/>
+                    </a>
+
                 </ul>
             </div>
         </div>
@@ -53,6 +69,13 @@
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="static/js/smartwidgets/jarvis.widget.min.js"></script>
+    <script src="static/js/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
+    <script src="static/js/clockpicker/clockpicker.min.js"></script>
+    <script src="static/js/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+    <script src="static/js/bootstrap-datepicker/bootstrap-datepicker.pl.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+    <!--<wicket:container wicket:id="script"/>-->
 
 </wicket:extend>

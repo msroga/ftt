@@ -5,5 +5,13 @@ package pl.ftt.core.mappings;
  */
 public interface FttApiMappings
 {
-   String HOME_PAGE = "/public/home";
+   String REGISTER_PAGE = "/public/register";
+
+   String HOME_PAGE = "/private/home";
+
+   String PUBLIC_CONNECTION_PAGE = "/public/connection";
+
+   String PRIVATE_ADMIN_PAGE = "/private/administration";
+
+   String PRIVATE_USERS_PAGE = "private/users";
 }

@@ -6,8 +6,8 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-//@Entity
-//@Table(name = "password")
+@Entity
+@Table(name = "\"password\"")
 public class Password extends AbstractEntity
 {
    public static final String FIELD_PASSWORD = "password";

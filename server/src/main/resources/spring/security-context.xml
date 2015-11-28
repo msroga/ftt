@@ -28,8 +28,8 @@
     </bean>
 
     <bean id="userDetailsService" class="pl.ftt.security.FttUserDetailsService">
-        <!--<property name="userService" ref="userService"/>-->
-        <!--<property name="passwordService" ref="passwordService" />-->
+        <property name="userService" ref="userService"/>
+        <property name="passwordService" ref="passwordService" />
         <property name="configurationService" ref="defaultConfigurationService" />
         <property name="passwordEncoder" ref="passwordEncoder" />
         <property name="checkAdminIpAddress" value="${check.admin.ip.address}" />

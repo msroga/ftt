@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<wicket:extend xmlns:wicket="http://wicket.apache.org">
+    <form wicket:id="searchForm" class="well">
+        <div class="row">
+            <label class="col-sm-1"><wicket:message key="search.connection"></wicket:message></label>
+            <div class="col-sm-2">
+                <input wicket:id="stationFrom" type="text" class="form-control">
+            </div>
+            <div class="col-sm-2">
+                <input wicket:id="stationTo" type="text" class="form-control">
+            </div>
+
+            <button wicket:id="submitButton" class="btn btn-primary pull-right" type="submit">
+                <wicket:message key="button.search"/>
+            </button>
+        </div>
+    </form>
+</wicket:extend>
