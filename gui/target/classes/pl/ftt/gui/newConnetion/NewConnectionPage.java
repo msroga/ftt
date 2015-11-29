@@ -16,7 +16,7 @@ public class NewConnectionPage extends AbstractDetailsPage
    public NewConnectionPage()
    {
       form = new Form("form");
-      add(form);
+      bodyContainer.add(form);
 
       form.add(new AddStationPanel("addStation", new Model<Station>())
       {

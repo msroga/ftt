@@ -1,6 +1,10 @@
 /**
  * Created by Marek on 2015-05-28.
  */
+$(document).ready(function () {
+    pageSetUp();
+});
+
 function initCKEditor(textarea_id, language) {
 
     CKEDITOR.replace(textarea_id, {
