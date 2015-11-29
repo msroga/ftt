@@ -18,6 +18,8 @@ import pl.ftt.core.menu.MenuElement;
 import pl.ftt.core.pages.AbstractMenuPage;
 import pl.ftt.domain.User;
 import pl.ftt.domain.filters.OpenSearchDescription;
+import pl.ftt.domain.filters.UserFilter;
+import pl.ftt.gui.user.cmp.UserFilterToolbar;
 import pl.ftt.service.IUserService;
 
 import java.util.ArrayList;
@@ -64,6 +66,8 @@ public class UsersPage extends AbstractMenuPage
       });
 
       OpenSearchDescription<User> osd = new OpenSearchDescription<>();
+      UserFilter userFilter = new UserFilter();
+      osd.setFilter(userFilter);
       EntityProvider provider = new EntityProvider<User>(userService, osd);
 
       table = new DataTable<User>("table", columns, new ResourceModel("users.table.header"), provider, 25, true)
@@ -74,6 +78,7 @@ public class UsersPage extends AbstractMenuPage
             setResponsePage(new UserDetailsPage(model));
          }
       };
+      table.addToolbar(new UserFilterToolbar(table));
       bodyContainer.add(table);
    }
 }

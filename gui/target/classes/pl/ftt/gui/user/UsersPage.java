@@ -18,6 +18,8 @@ import pl.ftt.core.menu.MenuElement;
 import pl.ftt.core.pages.AbstractMenuPage;
 import pl.ftt.domain.User;
 import pl.ftt.domain.filters.OpenSearchDescription;
+import pl.ftt.domain.filters.UserFilter;
+import pl.ftt.gui.user.cmp.UserFilterToolbar;
 import pl.ftt.service.IUserService;
 
 import java.util.ArrayList;
@@ -34,6 +36,8 @@ public class UsersPage extends AbstractMenuPage
    @SpringBean
    private IUserService userService;
 
+   private DataTable<User> table;
+
    public UsersPage()
    {
       List<IColumn<User, String>> columns = new ArrayList<>();
@@ -49,6 +53,7 @@ public class UsersPage extends AbstractMenuPage
          public void onClick(AjaxRequestTarget target, User user)
          {
             userService.delete(user);
+            table.refresh(target);
          }
 
          @Override
@@ -61,9 +66,11 @@ public class UsersPage extends AbstractMenuPage
       });
 
       OpenSearchDescription<User> osd = new OpenSearchDescription<>();
+      UserFilter userFilter = new UserFilter();
+      osd.setFilter(userFilter);
       EntityProvider provider = new EntityProvider<User>(userService, osd);
 
-      DataTable<User> table = new DataTable<User>("table", columns, new ResourceModel("users.table.header"), provider, 25, true)
+      table = new DataTable<User>("table", columns, new ResourceModel("users.table.header"), provider, 25, true)
       {
          @Override
          protected void onRowClick(AjaxRequestTarget target, IModel<User> model)
@@ -71,6 +78,7 @@ public class UsersPage extends AbstractMenuPage
             setResponsePage(new UserDetailsPage(model));
          }
       };
+      table.addToolbar(new UserFilterToolbar(table));
       bodyContainer.add(table);
    }
 }

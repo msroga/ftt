@@ -25,7 +25,12 @@ public class UserDetailsPage extends AbstractDetailsPage<User>
    @SpringBean
    private IUserService userService;
 
-   public UserDetailsPage(IModel<User> model)
+   public UserDetailsPage()
+   {
+      this(new Model<User>());
+   }
+
+   public UserDetailsPage(final IModel<User> model)
    {
       this.userModel = model;
       PortletPanel<User> portletPanel = new PortletPanel<User>("portlet", userModel)
@@ -56,7 +61,18 @@ public class UserDetailsPage extends AbstractDetailsPage<User>
          {
             return new UserReadOnlyPanel(id, model);
          }
+
+         @Override
+         protected void onConfigure()
+         {
+            super.onConfigure();
+            if (model.getObject() == null)
+            {
+               model.setObject(new User());
+            }
+         }
       };
+      portletPanel.setEditMode(model.getObject() == null);
       bodyContainer.add(portletPanel);
    }
 }
