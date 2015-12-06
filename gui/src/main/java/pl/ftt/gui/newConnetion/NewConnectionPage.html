@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
-    <form wicket:id="form">
-        <div wicket:id="addStation"></div>
-    </form>
+    <div id="container" class="well">
+        <a wicket:id="addLink" class="btn btn-sm btn-primary">
+            <wicket:message key="button.add"></wicket:message>
+            <i class="fa fa-plus"></i>
+        </a>
+        <form wicket:id="form" class="row">
+            <div wicket:id="stationsContainer" class="col-sm-7">
+                <wicket:container wicket:id="stationsView">
+                    <div class="row padding-5" wicket:id="panel"/>
+                </wicket:container>
+            </div>
+        </form>
+    </div>
 </wicket:extend>

@@ -13,5 +13,9 @@ public interface FttApiMappings
 
    String PRIVATE_ADMIN_PAGE = "/private/administration";
 
-   String PRIVATE_USERS_PAGE = "private/users";
+   String PRIVATE_USERS_PAGE = "/private/users";
+
+   String PRIVATE_STATIONS_PAGE = "/private/stations";
+
+   String PRIVATE_CONNECTION_PAGE = "/private/connection";
 }

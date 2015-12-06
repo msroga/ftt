@@ -76,6 +76,12 @@ public abstract class IconColumn<T> extends AbstractColumn<T, String>
                   tag.put("class", cssClazz);
                }
             }
+
+            @Override
+            protected void onConfigure()
+            {
+               super.onConfigure();
+            }
          };
          Label label = new Label("icon");
          label.add(AttributeModifier.replace("class", icon));

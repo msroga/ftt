@@ -1,7 +1,7 @@
 package pl.ftt.domain.rel;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
+import org.joda.time.LocalTime;
 import pl.ftt.domain.AbstractEntity;
 import pl.ftt.domain.Connection;
 import pl.ftt.domain.Station;
@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "\"connection_station_relation\"")
-public class ConnectionStationRelation extends AbstractEntity
+public class ConnectionStationRelation extends AbstractEntity implements Comparable<ConnectionStationRelation>
 {
    public static final String FIELD_CONNECTION = "connection";
 
@@ -40,14 +40,25 @@ public class ConnectionStationRelation extends AbstractEntity
    private int index;
 
    @Column(name = "arrival_time", nullable = false)
-   @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+   @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTime")
    @NotNull
-   private DateTime arrivalTime;
+   private LocalTime arrivalTime;
 
    @Column(name = "departure_time", nullable = false)
-   @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+   @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTime")
    @NotNull
-   private DateTime departureTime;
+   private LocalTime departureTime;
+
+   public ConnectionStationRelation()
+   {
+   }
+
+   public ConnectionStationRelation(Connection connection, Station station)
+   {
+
+      this.connection = connection;
+      this.station = station;
+   }
 
    public Connection getConnection()
    {
@@ -79,23 +90,29 @@ public class ConnectionStationRelation extends AbstractEntity
       this.index = index;
    }
 
-   public DateTime getArrivalTime()
+   public LocalTime getArrivalTime()
    {
       return arrivalTime;
    }
 
-   public void setArrivalTime(DateTime arrivalTime)
+   public void setArrivalTime(LocalTime arrivalTime)
    {
       this.arrivalTime = arrivalTime;
    }
 
-   public DateTime getDepartureTime()
+   public LocalTime getDepartureTime()
    {
       return departureTime;
    }
 
-   public void setDepartureTime(DateTime departureTime)
+   public void setDepartureTime(LocalTime departureTime)
    {
       this.departureTime = departureTime;
+   }
+
+   @Override
+   public int compareTo(ConnectionStationRelation o)
+   {
+      return Integer.compare(this.index, o.getIndex());
    }
 }

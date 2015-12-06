@@ -18,7 +18,7 @@ public class Station extends AbstractEntity
 
    public static final String FIELD_NAME = "name";
 
-   public static final String FIELD_GPS_LAT = "gpaLat";
+   public static final String FIELD_GPS_LAT = "gpsLat";
 
    public static final String FIELD_GPS_LON = "gpsLon";
 

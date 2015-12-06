@@ -57,8 +57,8 @@ CREATE TABLE "connection_station_relation"(
   connection_id INT8 NOT NULL,
   station_id INT8 NOT NULL,
   index INT4 NOT NULL,
-  arrival_time TIMESTAMP WITHOUT TIME ZONE,
-  departure_time TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+  arrival_time TIME,
+  departure_time TIME NOT NULL,
   CONSTRAINT connection_id_fk FOREIGN KEY (connection_id)
     REFERENCES "connection" (id) ON DELETE CASCADE,
   CONSTRAINT station_id_fk FOREIGN KEY (station_id)
