@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wicket:panel xmlns:wicket="http://wicket.apache.org">
+    <div class="col-sm-5">
+        <h2>
+            <label><wicket:message key="stations.header"></wicket:message></label>
+        </h2>
+        <div wicket:id="identifier"/>
+        <div wicket:id="comment"/>
+        <div wicket:id="tagsContainer">
+            <div wicket:id="tags"/>
+        </div>
+    </div>
+
+    <div  class="col-sm-7">
+        <h2>
+            <label><wicket:message key="stations.header"></wicket:message></label>
+            <a wicket:id="addLink" class="btn btn-xs btn-primary">
+                <wicket:message key="button.add"></wicket:message>
+                <i class="fa fa-plus"></i>
+            </a>
+        </h2>
+        <div wicket:id="stationsContainer">
+            <wicket:container wicket:id="stationsView">
+                <div class="row padding-5" wicket:id="panel"/>
+            </wicket:container>
+        </div>
+    </div>
+
+</wicket:panel>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wicket:panel xmlns:wicket="http://wicket.apache.org">
+    <div class="row">
+        <form wicket:id="form">
+
+            <div class="col-sm-2">
+                <!--<input wicket:id="loginFilter" type="text" class="form-control">-->
+            </div>
+            <div class="col-sm-2 pull-right">
+                <a class="btn btn-primary btn-sm pull-right" wicket:id="submitButton"><i class="fa fa-search"></i>
+                    <wicket:message key="button.search"/>
+                </a>
+                <a wicket:message="title:clear.filters"
+                   class="btn btn-primary btn-sm pull-right btn-right-separator"
+                   wicket:id="refreshButton">
+                    <i class="fa fa-eraser"></i>
+                </a>
+                <a class="btn btn-primary btn-sm pull-right btn-right-separator" wicket:id="addLink">
+                    <i class="fa fa-plus"></i>
+                </a>
+            </div>
+
+        </form>
+    </div>
+</wicket:panel>
