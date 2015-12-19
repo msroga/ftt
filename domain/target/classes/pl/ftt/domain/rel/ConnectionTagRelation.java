@@ -31,6 +31,16 @@ public class ConnectionTagRelation extends AbstractEntity
    @NotNull
    private Tag tag;
 
+   public ConnectionTagRelation()
+   {
+   }
+
+   public ConnectionTagRelation(Connection connection, Tag tag)
+   {
+      this.connection = connection;
+      this.tag = tag;
+   }
+
    public Connection getConnection()
    {
       return connection;

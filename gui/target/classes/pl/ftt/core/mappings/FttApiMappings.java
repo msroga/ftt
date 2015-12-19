@@ -18,4 +18,6 @@ public interface FttApiMappings
    String PRIVATE_STATIONS_PAGE = "/private/stations";
 
    String PRIVATE_CONNECTION_PAGE = "/private/connection";
+
+   String PRIVATE_TAGS_PAGE = "/private/tags";
 }

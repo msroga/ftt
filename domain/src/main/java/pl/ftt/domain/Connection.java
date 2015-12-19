@@ -39,6 +39,11 @@ public class Connection extends AbstractEntity
    @NotNull
    private ConnectionTypeEnum type;
 
+   public Connection()
+   {
+      this.type = ConnectionTypeEnum.REGIONAL; //for next versions
+   }
+
    public boolean isActive()
    {
       return active;

@@ -47,7 +47,6 @@ CREATE TABLE "connection"(
   identifier VARCHAR(16) NOT NULL,
   comment TEXT,
   "type" VARCHAR (32) NOT NULL,
-  UNIQUE (identifier)
 );
 CREATE INDEX connection_active_idx ON "connection" USING btree (active);
 CREATE INDEX connection_identifier_idx ON "connection" USING btree (identifier);

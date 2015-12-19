@@ -3,11 +3,17 @@
     <form wicket:id="searchForm" class="well">
         <div class="row">
             <label class="col-sm-1"><wicket:message key="search.connection"></wicket:message></label>
-            <div class="col-sm-2">
-                <input wicket:id="stationFrom" type="text" class="form-control">
+            <div class="col-sm-2 no-padding">
+                <div wicket:id="stationFrom"></div>
             </div>
-            <div class="col-sm-2">
-                <input wicket:id="stationTo" type="text" class="form-control">
+            <div class="col-sm-2 no-padding">
+                <div wicket:id="stationTo"></div>
+            </div>
+            <div class="col-sm-2 no-padding">
+                <input wicket:id="arrivalTime" type="text" class="form-control">
+            </div>
+            <div class="col-sm-4 no-padding">
+                <div wicket:id="tags"/>
             </div>
 
             <button wicket:id="submitButton" class="btn btn-primary pull-right" type="submit">
