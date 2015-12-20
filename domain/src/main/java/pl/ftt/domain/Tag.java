@@ -14,6 +14,8 @@ import javax.persistence.Table;
 @Table(name = "\"tag\"")
 public class Tag extends AbstractEntity
 {
+   public static final String FIELD_ACTIVE = "active";
+
    public static final String FIELD_NAME = "name";
 
    public static final String FIELD_DESCRIPTION = "description";
@@ -27,6 +29,9 @@ public class Tag extends AbstractEntity
 
    @Column(nullable = true, name = "description")
    private String description;
+
+   @Column(nullable = false, name = "active")
+   private boolean active;
 
    public String getName()
    {
@@ -46,5 +51,15 @@ public class Tag extends AbstractEntity
    public void setDescription(String description)
    {
       this.description = description;
+   }
+
+   public boolean isActive()
+   {
+      return active;
+   }
+
+   public void setActive(boolean active)
+   {
+      this.active = active;
    }
 }

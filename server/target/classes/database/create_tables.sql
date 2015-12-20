@@ -46,7 +46,7 @@ CREATE TABLE "connection"(
   active BOOLEAN NOT NULL DEFAULT TRUE,
   identifier VARCHAR(16) NOT NULL,
   comment TEXT,
-  "type" VARCHAR (32) NOT NULL,
+  "type" VARCHAR (32) NOT NULL
 );
 CREATE INDEX connection_active_idx ON "connection" USING btree (active);
 CREATE INDEX connection_identifier_idx ON "connection" USING btree (identifier);
@@ -71,6 +71,7 @@ CREATE TABLE "tag"(
   id BIGSERIAL PRIMARY KEY,
   name VARCHAR (128) NOT NULL,
   description TEXT,
+  active BOOLEAN NOT NULL DEFAULT TRUE,
   UNIQUE (name)
 );
 CREATE INDEX tag_name_idx ON "tag" USING btree (name);

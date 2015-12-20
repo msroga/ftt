@@ -13,6 +13,7 @@ import pl.ftt.core.authentication.AuthorizeType;
 import pl.ftt.core.component.ConfirmationCallListener;
 import pl.ftt.core.component.table.DataTable;
 import pl.ftt.core.component.table.EntityProvider;
+import pl.ftt.core.component.table.colums.DefaultColumn;
 import pl.ftt.core.component.table.colums.IconColumn;
 import pl.ftt.core.component.table.colums.StyledPropertyColumn;
 import pl.ftt.core.mappings.FttApiMappings;
@@ -46,6 +47,7 @@ public class StationsPage extends AbstractMenuPage
       List<IColumn<Station, String>> columns = new ArrayList<>();
 
       columns.add(new StyledPropertyColumn<Station>(new ResourceModel("station.name"), Station.FIELD_NAME, Station.FIELD_NAME));
+      columns.add(new DefaultColumn<Station>(new ResourceModel("station.active"), Station.FIELD_ACTIVE));
       columns.add(new StyledPropertyColumn<Station>(new ResourceModel("station.lat"), Station.FIELD_GPS_LAT));
       columns.add(new StyledPropertyColumn<Station>(new ResourceModel("station.lon"), Station.FIELD_GPS_LON));
       columns.add(new IconColumn<Station>(new ResourceModel("delete.column"), "fa fa-times")

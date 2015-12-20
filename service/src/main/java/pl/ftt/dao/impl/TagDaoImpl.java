@@ -28,6 +28,11 @@ public class TagDaoImpl extends AbstractDaoImpl<Tag> implements ITagDao
          {
             criteria.add(Restrictions.ilike(Tag.FIELD_NAME, tagFilter.getName(), MatchMode.START));
          }
+
+         if (tagFilter.getActive() != null)
+         {
+            criteria.add(Restrictions.eq(Tag.FIELD_ACTIVE, tagFilter.getActive()));
+         }
       }
 
       return criteria;

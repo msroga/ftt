@@ -30,6 +30,10 @@ public class StationDaoImpl extends AbstractDaoImpl<Station> implements IStation
          {
             criteria.add(Restrictions.ilike(Station.FIELD_NAME, stationFilter.getName(), MatchMode.START));
          }
+         if (stationFilter.getActive() != null)
+         {
+            criteria.add(Restrictions.eq(Station.FIELD_ACTIVE, stationFilter.getActive()));
+         }
       }
       return criteria;
    }
