@@ -1,6 +1,7 @@
 package pl.ftt.dao;
 
 import pl.ftt.domain.Connection;
+import pl.ftt.domain.filters.ConnectionFilter;
 import pl.ftt.domain.rel.ConnectionStationRelation;
 
 import java.util.List;
@@ -11,4 +12,6 @@ import java.util.List;
 public interface IConnectionStationRelationDao extends IAbstractDao<ConnectionStationRelation>
 {
    List<ConnectionStationRelation> find(Connection connection);
+
+   List<ConnectionStationRelation>  find(ConnectionFilter filter);
 }

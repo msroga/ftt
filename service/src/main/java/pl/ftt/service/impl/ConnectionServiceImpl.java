@@ -1,10 +1,12 @@
 package pl.ftt.service.impl;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.MapUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ftt.dao.*;
 import pl.ftt.domain.Connection;
+import pl.ftt.domain.Station;
 import pl.ftt.domain.Tag;
 import pl.ftt.domain.filters.ConnectionFilter;
 import pl.ftt.domain.rel.ConnectionStationRelation;
@@ -12,8 +14,7 @@ import pl.ftt.domain.rel.ConnectionTagRelation;
 import pl.ftt.service.IConnectionService;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Marek on 2015-11-12.
@@ -151,8 +152,64 @@ public class ConnectionServiceImpl extends AbstractServiceImpl<Connection> imple
 
    @Override
    @Transactional(readOnly = true)
-   public void find(ConnectionFilter filter)
+   public Map<Connection, List<ConnectionStationRelation>> find(ConnectionFilter filter)
    {
-      connectionDao.find(filter);
+      Map<Connection, List<ConnectionStationRelation>> map = new HashMap<>();
+      List<ConnectionStationRelation> connections =  stationRelationDao.find(filter);
+      for (ConnectionStationRelation relation : connections)
+      {
+         List<ConnectionStationRelation> list = map.get(relation.getConnection());
+         if (list == null)
+         {
+            list = new ArrayList<>();
+            map.put(relation.getConnection(), list);
+         }
+         list.add(relation);
+      }
+
+      //wywalic te gdzie sie nie zgadza od do :)
+      if (!MapUtils.isEmpty(map))
+      {
+         Iterator<Connection> iterator = map.keySet().iterator();
+         while (iterator.hasNext())
+         {
+            List<ConnectionStationRelation> relations = map.get(iterator.next());
+            if (!match(filter.getStationFrom(), filter.getStationTo(), relations))
+            {
+               iterator.remove();
+            }
+            else
+            {
+               Collections.sort(relations, new Comparator<ConnectionStationRelation>()
+               {
+                  @Override
+                  public int compare(ConnectionStationRelation o1, ConnectionStationRelation o2)
+                  {
+                     return o1.getIndex() - o2.getIndex();
+                  }
+               });
+            }
+         }
+      }
+
+      return map;
+   }
+
+   private boolean match(Station stationFrom, Station stationTo, List<ConnectionStationRelation> relations)
+   {
+      int indexFrom = -1;
+      int indexTo = -1;
+      for (ConnectionStationRelation relation : relations)
+      {
+         if (relation.getStation().equals(stationFrom))
+         {
+            indexFrom = relation.getIndex();
+         }
+         if (relation.getStation().equals(stationTo))
+         {
+            indexTo = relation.getIndex();
+         }
+      }
+      return indexFrom < indexTo;
    }
 }

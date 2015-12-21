@@ -21,4 +21,24 @@
             </button>
         </div>
     </form>
+
+    <div wicket:id="resultContainer" class="well">
+        <div wicket:id="connections" class="well">
+            <strong><label wicket:id="identifier"></label></strong>
+            <strong><label wicket:id="comment"></label></strong>
+            <table class="table">
+                <tr>
+                    <th><wicket:message key="station.name"></wicket:message></th>
+                    <th><wicket:message key="arrival.time"></wicket:message></th>
+                    <th><wicket:message key="departure.time"></wicket:message></th>
+                </tr>
+                <tr wicket:id="station">
+                    <td><label wicket:id="name"></label></td>
+                    <td><label wicket:id="arrivalTime"></label></td>
+                    <td><label wicket:id="departureTime"></label></td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
 </wicket:extend>

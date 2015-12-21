@@ -6,6 +6,7 @@ import pl.ftt.domain.filters.ConnectionFilter;
 import pl.ftt.domain.rel.ConnectionStationRelation;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Marek on 2015-11-12.
@@ -16,5 +17,5 @@ public interface IConnectionService extends IAbstractService<Connection>
 
    void update(Connection connection, List<ConnectionStationRelation> stations, List<Tag> tags);
 
-   void find(ConnectionFilter filter);
+   Map<Connection, List<ConnectionStationRelation>> find(ConnectionFilter filter);
 }

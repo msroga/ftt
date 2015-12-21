@@ -67,10 +67,4 @@ public class ConnectionDaoImpl extends AbstractDaoImpl<Connection> implements IC
 
       return criteria;
    }
-
-   @Override
-   public void find(ConnectionFilter filter)
-   {
-      Criteria criteria = createCriteriaFromSearchParams(filter);
-   }
 }
